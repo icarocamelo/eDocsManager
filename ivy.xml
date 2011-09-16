@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0">
+	<info organisation="auctor" module="eDocsManager" />
+	<configurations>
+		<conf name="compile" />
+		<conf name="runtime" />
+		<conf name="compile-test" extends="compile" />
+		<conf name="runtime-test" extends="compile-test" />
+		<conf name="default" extends="runtime" />
+		<conf name="dist" extends="compile" visibility="public" />
+		<conf name="master" />
+	</configurations>
+	−
+	<publications>
+		<artifact conf="runtime,dist,master" />
+	</publications>
+
+	<dependencies>
+
+		<dependency org="org.slf4j" name="slf4j-api" rev="1.6.1" />
+		<dependency org="org.slf4j" name="slf4j-log4j12" rev="1.6.1" />
+		<dependency org="postgresql" name="postgresql" rev="8.4-702.jdbc4" />
+		<dependency org="org.hibernate" name="hibernate-core" rev="3.6.4.Final"
+			conf="compile,runtime->default" />
+		<dependency org="org.hibernate" name="hibernate-entitymanager"
+			rev="3.4.0.GA" conf="compile,runtime->default" />
+		<dependency org="org.hibernate" name="hibernate-annotations"
+			rev="3.4.0.GA" conf="compile,runtime->default" />
+		<dependency org="org.hibernate" name="hibernate-ehcache"
+			rev="3.3.2.GA" conf="compile,runtime->default" />
+		<dependency org="junit" name="junit" rev="4.8.2"
+			conf="compile,runtime->default" />
+		<dependency org="org.mockito" name="mockito-core" rev="1.8.5"  
+			conf="compile,runtime->default" />
+		<dependency org="org.mockito" name="mockito-all" rev="1.8.5"
+			conf="compile,runtime->default" />
+
+		<dependency org="javax.ws.rs" name="jsr311-api" rev="1.1.1"/>
+		<dependency org="com.sun.jersey" name="jersey-client" rev="1.4" conf="compile,runtime->default"/>
+        <dependency org="com.sun.jersey" name="jersey-server" rev="1.4" conf="compile,runtime->default"/>
+        <dependency org="com.sun.jersey" name="jersey-json" rev="1.4" conf="compile,runtime->default"/> 
+
+
+		<dependency org="log4j" name="log4j" rev="1.2.16"
+			conf="compile,runtime->default" />
+			
+		<dependency org="com.amazonaws" name="aws-java-sdk" rev="1.2.7" conf="compile,runtime->default" transitive="false"/>
+	</dependencies>
+</ivy-module>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="deploy">
+	<property name="src-dir" location="src" />
+	<property name="metainf-dir" location="WebContent/META-INF" />
+	<property name="test-dir" location="tests" />
+	<property name="build-dir" location="build" />
+	<property name="dist-dir" location="dist" />
+	<property name="lib-dir" location="WebContent/WEB-INF/lib" />
+	<property name="webinf-dir" location="WebContent/WEB-INF/" />
+	<property name="tomcat-webapps" location="C:/tomcat/webapps" />
+	<property name="TALK" value="true" />
+
+	<path id="classpath.base">
+		<fileset dir="${lib-dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="build" depends="compiler">
+		<echo>Junit</echo>
+		<junit failureProperty="test.failure">
+			<classpath refid="classpath.base" />
+			<formatter type="brief" usefile="false" />
+			<batchtest>
+				<fileset dir="${build-dir}" includes="br/**Test**/" />
+			</batchtest>
+		</junit>
+
+		<fail message="test failed" if="test.failure" />
+	</target>
+
+	<target name="compiler" depends="clean-build">
+		<javac srcdir="${src-dir}" destdir="${build-dir}" verbose="${TALK}">
+			<classpath refid="classpath.base" />
+		</javac>
+		<javac srcdir="${test-dir}" destdir="${build-dir}" verbose="${TALK}">
+			<classpath refid="classpath.base" />
+		</javac>
+
+	</target>
+
+	<target name="clean-build" depends="clean-war">
+		<delete verbose="${TALK}">
+			<fileset dir="${build-dir}" includes="*" />
+		</delete>
+	</target>
+
+	<target name="clean-war">
+		<delete verbose="${TALK}">
+			<fileset dir="${dist-dir}" includes="*" />
+		</delete>
+	</target>
+
+	<target name="copy_xmls" depends="build">
+		<mkdir dir="${build-dir}/META-INF"/>
+		<copy todir="${build-dir}/META-INF">
+		 <fileset dir="${metainf-dir}">
+						<include name="**.xml" />
+						<include name="**.properties" />
+		</fileset>
+		</copy>
+	</target>
+	
+	<target name="war" depends="copy_xmls">
+		<war destfile="${dist-dir}/proton.war" webxml="${webinf-dir}/web.xml">
+			<lib dir="${lib-dir}">
+				<include name="**/*.jar" />
+			</lib>
+			<classes dir="${build-dir}">
+				<exclude name="**/test**">
+				</exclude>
+			</classes>
+		</war>
+	</target>
+
+	<target name="deploy" depends="war">
+		<copy todir="${tomcat-webapps}">
+			<fileset dir="${dist-dir}" />
+		</copy>
+	</target>
+
+</project>
