@@ -26,6 +26,6 @@ public class FolderController {
 	@Path("/add")
 	@Produces(MediaType.TEXT_PLAIN)
 	public void add(String folderName){
-		rep.save(new Folder(folderName, Visibility.CUSTOM, true));
+		rep.insert(new Folder(folderName, Visibility.CUSTOM, true));
 	}
 }

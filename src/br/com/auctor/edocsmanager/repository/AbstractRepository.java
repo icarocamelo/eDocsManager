@@ -28,12 +28,8 @@ public abstract class AbstractRepository<T extends Object> implements
 	private EntityManager em = null;
 	private EntityTransaction tx = null;
 
-	public AbstractRepository(final Class<?> tClass) {
-		type = tClass;
-	}
-
 	
-	private T insert(T obj) {
+	public T insert(T obj) {
 
 		Session session = null;
 		Transaction tx = null;
@@ -64,16 +60,8 @@ public abstract class AbstractRepository<T extends Object> implements
 		return obj;
 
 	}
-
-	@Override
-	public T save(T obj) {
-		
-		update(obj);
-		insert(obj);
-		return null;
-	}
 	
-	private T update(T obj) {
+	public T update(T obj) {
 		Session session = null;
 		Transaction tx = null;
 
@@ -82,7 +70,7 @@ public abstract class AbstractRepository<T extends Object> implements
 
 			session = (Session) em.getDelegate();
 			tx = session.beginTransaction();
-			session.merge(obj);
+			session.update(obj);
 			tx.commit();
 		} catch (RuntimeException re) {
 			log.log(Level.SEVERE, re.getMessage());
