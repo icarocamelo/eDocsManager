@@ -3,18 +3,38 @@ package br.com.auctor.edocsmanager.model;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+
 /**
  * @author IcaroCamelo
  *
  */
 public abstract class User {
+	
+	@Column(length=100, nullable=false)
 	private String name;
+	
+	@Column
 	private String address;
+	
+	@Column(length=15)
 	private String phone;
+	
+	@Column(length=100)
 	private String email;
+	
+	@Column
 	private String password;
+	
+	@OneToMany(fetch=FetchType.LAZY)
 	private Collection<User> followers;
+	
+	@Column
 	private Date registrationDate;
+	
+	@Column
 	private Boolean isActive;
 	
 	

@@ -32,8 +32,8 @@ public abstract class AbstractRepository<T extends Object> implements
 		type = tClass;
 	}
 
-	@Override
-	public T insert(T obj) {
+	
+	private T insert(T obj) {
 
 		Session session = null;
 		Transaction tx = null;
@@ -66,7 +66,14 @@ public abstract class AbstractRepository<T extends Object> implements
 	}
 
 	@Override
-	public T update(T obj) {
+	public T save(T obj) {
+		
+		update(obj);
+		insert(obj);
+		return null;
+	}
+	
+	private T update(T obj) {
 		Session session = null;
 		Transaction tx = null;
 

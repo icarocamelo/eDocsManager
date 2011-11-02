@@ -7,8 +7,7 @@ import java.util.Collection;
  *
  */
 public interface Repository <T extends Object> {
-	T insert(T obj);
-	T update(T obj);
+	T save(T obj);
 	Boolean delete(T obj);
 	T getById(Long id);
 	Collection<T> getAll();

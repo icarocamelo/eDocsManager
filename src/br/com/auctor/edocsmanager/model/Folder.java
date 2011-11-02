@@ -5,19 +5,45 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * @author IcaroCamelo
  *
  */
 public class Folder {
+	
+	@Id
 	private Long id;
+	
+	@Column(nullable=false, length=100)
 	private String name;
+	
+	@Enumerated(EnumType.ORDINAL)
 	private Visibility visibility;
+	
+	@Column
 	private Boolean visibilityInCascade;
+	
+	@ManyToOne
 	private User owner;
+	
+	@Column
 	private Date creationDate;
+	
+	@Column
 	private Date updateDate;
+	
+	@OneToMany(fetch=FetchType.LAZY)
 	private Collection<Document> documents;
+	
+	@OneToMany(fetch=FetchType.LAZY)
 	private Collection<Folder> folders;
 	
 	public Folder() {	

@@ -30,7 +30,7 @@ public class AbstractRepositoryTest {
 		actual.setVisibility(Visibility.PUBLIC);
 		actual.setVisibilityInCascade(true);
 		
-		when(repository.insert(actual)).thenReturn(actual);
+		when(repository.save(actual)).thenReturn(actual);
 
 		Assert.assertEquals("Home", actual.getName());
 		Assert.assertEquals(Visibility.PUBLIC, actual.getVisibility());

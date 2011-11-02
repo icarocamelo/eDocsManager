@@ -5,23 +5,53 @@ package br.com.auctor.edocsmanager.model;
 
 import java.util.Date;
 
-import javax.ws.rs.core.MediaType;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.Entity;
+
 
 /**
  * @author IcaroCamelo
  *
  */
+@Entity
 public abstract class Document {
+	
+	@Id
 	private Long id;
+	
+	@Column(length=200)
 	private String name;
+	
+	@Column(length=200)
 	private String title;
+
+	@Column(length=300)
 	private String description;
+	
+	@Column
 	private MediaType mediaType;
+	
+	@Column
 	private Byte[] content;
+	
+	@ManyToOne
 	private User publisher;
+	
+	@Column
 	private Integer reads;
+	
+	@Enumerated(EnumType.ORDINAL)
 	private Visibility visibility;
+	
+	@Column
 	private Date creationDate;
+	
+	@Column
 	private Date updateDate;
 	
 

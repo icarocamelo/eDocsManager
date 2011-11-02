@@ -5,8 +5,10 @@
 	<persistence-unit name="org.hibernate.persistence.eDocsManager" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-		<class>br.com.fcmsistemas.proton.model.ConsumoDiario</class>
-		<class>br.com.fcmsistemas.proton.model.Consumo</class>
+		<class>br.com.auctor.edocsmanager.model.Document</class>
+		<class>br.com.auctor.edocsmanager.model.Folder</class>
+		<class>br.com.auctor.edocsmanager.model.Paper</class>
+		<class>br.com.auctor.edocsmanager.model.User</class>
 
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
